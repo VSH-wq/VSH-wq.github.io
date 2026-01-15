@@ -1,125 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Web Developer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background: #1fa463;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        header p {
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 30px auto;
-        }
-        .section-title {
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            border-bottom: 2px solid #1fa463;
-            display: inline-block;
-        }
-        .projects {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        .project {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .project h3 {
-            margin-top: 0;
-            color: #1fa463;
-        }
-        .project p {
-            margin: 10px 0;
-        }
-        .contact {
-            text-align: center;
-            margin-top: 40px;
-        }
-        .contact a {
-            color: #1fa463;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        footer {
-            text-align: center;
-            margin: 40px 0;
-            font-size: 0.9em;
-            color: #777;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishwas Saini | Python Web Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0e1117;
+  --card:#161b22;
+  --text:#e6edf3;
+  --accent:#00e5ff;
+}
+.light{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --text:#0f172a;
+  --accent:#2563eb;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.3s;
+}
+a{color:var(--accent);text-decoration:none}
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+nav{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+.menu-btn{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+}
+.toggle{
+  cursor:pointer;
+  font-size:20px;
+}
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:120px 20px;
+}
+.hero{
+  display:grid;
+  gap:20px;
+  animation:fadeUp 1s ease;
+}
+.hero h1{font-size:48px}
+.hero span{color:var(--accent)}
+.hero p{max-width:700px;opacity:.9}
+.btn{
+  display:inline-block;
+  padding:12px 26px;
+  border-radius:30px;
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+  margin-top:15px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  animation:fadeUp .8s ease;
+}
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+.project img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+.tech{
+  font-size:13px;
+  opacity:.8;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
+.gallery img{
+  width:100%;
+  border-radius:10px;
+  transition:.3s;
+}
+.gallery img:hover{
+  transform:scale(1.05);
+}
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.skill{
+  padding:8px 14px;
+  background:var(--card);
+  border-radius:20px;
+  font-size:14px;
+}
+footer{
+  text-align:center;
+  padding:30px;
+  opacity:.6;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:768px){
+  .nav-links{
+    position:absolute;
+    top:65px;
+    left:0;
+    right:0;
+    background:var(--bg);
+    flex-direction:column;
+    display:none;
+  }
+  .nav-links.show{display:flex}
+  .menu-btn{display:block}
+  .hero h1{font-size:36px}
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>Your Name</h1>
-    <p>Web Developer (Python • Flask • PostgreSQL • AI Integration)</p>
+<nav>
+  <strong>Vishwas Saini</strong>
+  <div class="menu-btn" onclick="menu()">☰</div>
+  <div class="nav-links" id="nav">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <span class="toggle" onclick="theme()">🌙</span>
+  </div>
+</nav>
 </header>
 
-<div class="container">
-    <!-- About -->
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <p>
-            Hello! I’m a web developer specializing in Python, Flask, backend systems, database integration,
-            email automation, and modern AI features. I build websites and web apps from concept to deployment.
-        </p>
-    </section>
+<section class="hero">
+<h1>Hi, I’m <span>Vishwas Saini</span></h1>
+<h2>Python Web Developer</h2>
+<p>
+I build modern, scalable web applications using Python, Flask, PostgreSQL, and AI integrations.
+I focus on clean architecture, responsive design, smooth user experiences, and delivering
+high-quality solutions with minimal operational cost.
+</p>
+<a class="btn" href="#projects">View My Work</a>
+</section>
 
-    <!-- Projects -->
-    <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects">
-            <div class="project">
-                <h3>Clinic Management System</h3>
-                <p>
-                    A full-featured clinic management web app built with Python, Flask, PostgreSQL, email, and AI.
-                </p>
-                <p><strong>Tech:</strong> Python, Flask, PostgreSQL, Brevo API, AI APIs</p>
-                <p><strong>Live Demo:</strong> <a href="https://yourdemo.com" target="_blank">yourdemo.com</a></p>
-            </div>
-            <div class="project">
-                <h3>Project 2 Title</h3>
-                <p>Short description of project 2.</p>
-                <p><strong>Tech:</strong> HTML, CSS, JS</p>
-                <p><strong>Live:</strong> <a href="https://link2.com" target="_blank">link2.com</a></p>
-            </div>
-        </div>
-    </section>
+<section id="projects">
+<h2>Projects</h2><br>
+<div class="projects">
+<div class="card project">
+<h3>Clinic Management Website</h3>
+<p>
+A full-featured Clinic Management System designed to help doctors efficiently manage patient
+information, medical records, appointments, and communication. Integrated with email automation
+and AI-powered features to streamline clinical workflows.
+</p>
+<p class="tech">
+Python • Flask • Neon PostgreSQL • Render • Brevo • Gemini AI • Mistral AI
+</p>
+<a class="btn" target="_blank" href="https://clinic-management-website.onrender.com/">Live Demo</a>
 
-    <!-- Contact -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/yourwhatsappphonenumber">Chat with me</a></p>
-    </section>
+<div class="gallery">
+<img src="screenshots/clinic-management-website/screenshot1.jpg">
+<img src="screenshots/clinic-management-website/screenshot2.jpg">
+<img src="screenshots/clinic-management-website/screenshot3.jpg">
+<img src="screenshots/clinic-management-website/screenshot4.jpg">
 </div>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<h2>Skills & Tools</h2><br>
+<div class="skills">
+<span class="skill">Python</span>
+<span class="skill">Flask</span>
+<span class="skill">PostgreSQL</span>
+<span class="skill">HTML</span>
+<span class="skill">CSS</span>
+<span class="skill">JavaScript</span>
+<span class="skill">Bootstrap</span>
+<span class="skill">Gemini AI</span>
+<span class="skill">Mistral AI</span>
+<span class="skill">Render</span>
+<span class="skill">Email APIs</span>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2><br>
+<div class="card">
+<p>Email: <a href="mailto:vissaini744@gmail.com">vissaini744@gmail.com</a></p>
+</div>
+</section>
 
 <footer>
-    © 2025 Your Name — All Rights Reserved
+© 2026 Vishwas Saini • Python Web Developer
 </footer>
+
+<script>
+function theme(){document.body.classList.toggle("light")}
+function menu(){document.getElementById("nav").classList.toggle("show")}
+</script>
 
 </body>
 </html>
