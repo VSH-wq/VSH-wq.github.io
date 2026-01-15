@@ -8,15 +8,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+html{scroll-behavior:smooth}
 :root{
-  --bg:#0e1117;
-  --card:#161b22;
+  --bg:#0b0f19;
+  --card:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.18);
   --text:#e6edf3;
   --accent:#00e5ff;
 }
 .light{
-  --bg:#f4f6f8;
-  --card:#ffffff;
+  --bg:#eef2f7;
+  --card:rgba(255,255,255,0.75);
+  --border:rgba(0,0,0,0.1);
   --text:#0f172a;
   --accent:#2563eb;
 }
@@ -25,133 +28,185 @@ body{
   font-family:Poppins,sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:.3s;
+  overflow-x:hidden;
 }
-a{color:var(--accent);text-decoration:none}
+
+/* ===== PARALLAX BACKGROUND ===== */
+.parallax{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+.parallax span{
+  position:absolute;
+  width:340px;
+  height:340px;
+  background:radial-gradient(circle,var(--accent),transparent 70%);
+  opacity:.12;
+}
+.parallax span:nth-child(1){top:10%;left:15%}
+.parallax span:nth-child(2){top:60%;left:70%}
+.parallax span:nth-child(3){top:30%;left:50%}
+
+/* ===== MAGNETIC CURSOR ===== */
+#cursor{
+  position:fixed;
+  width:18px;height:18px;
+  background:var(--accent);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:5000;
+  transition:.15s ease;
+}
+
+/* ===== HEADER ===== */
 header{
   position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(10px);
+  top:0;width:100%;
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.5);
   z-index:1000;
 }
 nav{
   max-width:1200px;
   margin:auto;
-  padding:15px;
+  padding:16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-.nav-links{
-  display:flex;
-  gap:25px;
-}
-.menu-btn{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
-.toggle{
-  cursor:pointer;
-  font-size:20px;
-}
+.nav-links{display:flex;gap:26px}
+.menu-btn{display:none;font-size:26px;cursor:pointer}
+.toggle{cursor:pointer}
+
+/* ===== SECTIONS ===== */
 section{
   max-width:1200px;
   margin:auto;
   padding:120px 20px;
+  opacity:0;
+  transform:translateY(60px) scale(.97);
+  transition:1s cubic-bezier(.16,1,.3,1);
 }
-.hero{
-  display:grid;
-  gap:20px;
-  animation:fadeUp 1s ease;
-}
-.hero h1{font-size:48px}
+section.show{opacity:1;transform:none}
+
+/* ===== HERO ===== */
+.hero h1{font-size:52px}
 .hero span{color:var(--accent)}
-.hero p{max-width:700px;opacity:.9}
+.hero p{max-width:760px;opacity:.85;margin-top:14px}
+
+/* ===== BUTTON (MAGNETIC) ===== */
 .btn{
   display:inline-block;
-  padding:12px 26px;
-  border-radius:30px;
-  background:var(--accent);
+  padding:14px 34px;
+  border-radius:40px;
+  background:linear-gradient(135deg,var(--accent),#38bdf8);
   color:#000;
   font-weight:600;
-  margin-top:15px;
+  margin-top:30px;
+  transition:.25s;
 }
-.card{
+
+/* ===== FILTERS ===== */
+.filters{display:flex;gap:14px;margin-bottom:30px}
+.filter-btn{
+  padding:10px 20px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
   background:var(--card);
-  border-radius:16px;
-  padding:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
-  animation:fadeUp .8s ease;
+  backdrop-filter:blur(14px);
+  border:1px solid var(--border);
+  color:var(--text);
 }
+.filter-btn.active{background:var(--accent);color:#000}
+
+/* ===== PROJECT CARDS (GLASS + 3D) ===== */
 .projects{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:25px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
 }
-.project img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:15px;
+.project{
+  background:var(--card);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:26px;
+  transform-style:preserve-3d;
+  transition:.4s cubic-bezier(.16,1,.3,1);
 }
-.tech{
-  font-size:13px;
-  opacity:.8;
+.project:hover{
+  transform:rotateX(8deg) rotateY(-8deg) translateY(-12px);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
+.project.hide{
+  opacity:0;
+  transform:scale(.9);
+  pointer-events:none;
+}
+
+/* ===== GALLERY ===== */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  grid-template-columns:repeat(4,1fr);
   gap:10px;
-  margin-top:15px;
+  margin-top:16px;
 }
 .gallery img{
   width:100%;
-  border-radius:10px;
+  border-radius:12px;
+  cursor:pointer;
   transition:.3s;
 }
-.gallery img:hover{
-  transform:scale(1.05);
-}
-.skills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
+.gallery img:hover{transform:scale(1.08)}
+
+/* ===== SKILLS ===== */
+.skills{display:flex;flex-wrap:wrap;gap:14px}
 .skill{
-  padding:8px 14px;
+  padding:10px 18px;
   background:var(--card);
-  border-radius:20px;
-  font-size:14px;
+  backdrop-filter:blur(12px);
+  border-radius:24px;
+  border:1px solid var(--border);
 }
-footer{
-  text-align:center;
-  padding:30px;
-  opacity:.6;
+
+/* ===== MODAL ===== */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
 }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:none}
-}
+#modal img{max-width:92%;max-height:92%;border-radius:18px}
+
+footer{text-align:center;padding:40px;opacity:.6}
+
+/* ===== MOBILE ===== */
 @media(max-width:768px){
   .nav-links{
     position:absolute;
-    top:65px;
-    left:0;
-    right:0;
+    top:70px;left:0;right:0;
     background:var(--bg);
     flex-direction:column;
     display:none;
   }
   .nav-links.show{display:flex}
   .menu-btn{display:block}
-  .hero h1{font-size:36px}
+  .hero h1{font-size:38px}
 }
 </style>
 </head>
 
 <body>
+
+<div id="cursor"></div>
+<div class="parallax"><span></span><span></span><span></span></div>
 
 <header>
 <nav>
@@ -179,24 +234,27 @@ high-quality solutions with minimal operational cost.
 
 <section id="projects">
 <h2>Projects</h2><br>
+
+<div class="filters">
+<button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
+<button class="filter-btn" onclick="filterProjects('web',this)">Web</button>
+<button class="filter-btn" onclick="filterProjects('ai',this)">AI</button>
+</div>
+
 <div class="projects">
-<div class="card project">
+<div class="project web ai">
 <h3>Clinic Management Website</h3>
 <p>
-A full-featured Clinic Management System designed to help doctors efficiently manage patient
-information, medical records, appointments, and communication. Integrated with email automation
-and AI-powered features to streamline clinical workflows.
-</p>
-<p class="tech">
-Python • Flask • Neon PostgreSQL • Render • Brevo • Gemini AI • Mistral AI
+A full-featured clinic management system enabling doctors to manage patient records,
+appointments, communication, and AI-powered workflows efficiently.
 </p>
 <a class="btn" target="_blank" href="https://clinic-management-website.onrender.com/">Live Demo</a>
 
 <div class="gallery">
-<img src="screenshots/clinic-management-website/screenshot1.jpg">
-<img src="screenshots/clinic-management-website/screenshot2.jpg">
-<img src="screenshots/clinic-management-website/screenshot3.jpg">
-<img src="screenshots/clinic-management-website/screenshot4.jpg">
+<img src="screenshots/clinic-management-website/screenshot1.jpg" onclick="openModal(this)">
+<img src="screenshots/clinic-management-website/screenshot2.jpg" onclick="openModal(this)">
+<img src="screenshots/clinic-management-website/screenshot3.jpg" onclick="openModal(this)">
+<img src="screenshots/clinic-management-website/screenshot4.jpg" onclick="openModal(this)">
 </div>
 </div>
 </div>
@@ -211,7 +269,6 @@ Python • Flask • Neon PostgreSQL • Render • Brevo • Gemini AI • Mist
 <span class="skill">HTML</span>
 <span class="skill">CSS</span>
 <span class="skill">JavaScript</span>
-<span class="skill">Bootstrap</span>
 <span class="skill">Gemini AI</span>
 <span class="skill">Mistral AI</span>
 <span class="skill">Render</span>
@@ -221,18 +278,62 @@ Python • Flask • Neon PostgreSQL • Render • Brevo • Gemini AI • Mist
 
 <section id="contact">
 <h2>Contact</h2><br>
-<div class="card">
 <p>Email: <a href="mailto:vissaini744@gmail.com">vissaini744@gmail.com</a></p>
-</div>
 </section>
 
-<footer>
-© 2026 Vishwas Saini • Python Web Developer
-</footer>
+<footer>© 2026 Vishwas Saini</footer>
+
+<div id="modal" onclick="closeModal()"><img id="modalImg"></div>
 
 <script>
+/* menu + theme */
+function menu(){nav.classList.toggle("show")}
 function theme(){document.body.classList.toggle("light")}
-function menu(){document.getElementById("nav").classList.toggle("show")}
+
+/* reveal */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
+},{threshold:.15})
+document.querySelectorAll("section").forEach(s=>obs.observe(s))
+
+/* modal */
+function openModal(img){
+  modal.style.display="flex"
+  modalImg.src=img.src
+}
+function closeModal(){modal.style.display="none"}
+
+/* filter */
+function filterProjects(type,btn){
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"))
+  btn.classList.add("active")
+  document.querySelectorAll(".project").forEach(p=>{
+    p.classList.toggle("hide",type!=="all"&&!p.classList.contains(type))
+  })
+}
+
+/* magnetic cursor + buttons */
+const cursor=document.getElementById("cursor")
+if(!("ontouchstart"in window)){
+  document.addEventListener("mousemove",e=>{
+    cursor.style.left=e.clientX+"px"
+    cursor.style.top=e.clientY+"px"
+  })
+  document.querySelectorAll(".btn").forEach(btn=>{
+    btn.addEventListener("mousemove",e=>{
+      const r=btn.getBoundingClientRect()
+      btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)/6}px,${(e.clientY-r.top-r.height/2)/6}px)`
+    })
+    btn.addEventListener("mouseleave",()=>btn.style.transform="")
+  })
+}else cursor.style.display="none"
+
+/* parallax */
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll(".parallax span").forEach((el,i)=>{
+    el.style.transform=`translateY(${scrollY*(0.15+i*0.07)}px)`
+  })
+})
 </script>
 
 </body>
