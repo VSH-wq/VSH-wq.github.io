@@ -8,96 +8,82 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===================================
-   THEME VARIABLES
-   =================================== */
+/* ========== GLOBAL VARIABLES ========== */
 :root{
-  --bg: #0a0d17;
-  --card-bg: rgba(30,32,47,0.65);
+  --bg: #090b12;
+  --card-bg: rgba(20,22,40,0.7);
+  --text: #e6edf3;
+  --muted: #a2aabb;
   --accent: #00e5ff;
-  --text: #e8eeff;
-  --muted: #a0a8ba;
   --border-glass: rgba(255,255,255,0.12);
   --shadow: rgba(0,0,0,0.45);
 }
 body.light{
   --bg: #f5f7fa;
-  --card-bg: rgba(255,255,255,0.85);
-  --accent: #2563eb;
+  --card-bg: rgba(255,255,255,0.8);
   --text: #14192c;
   --muted: #5a687e;
+  --accent: #2563eb;
   --border-glass: rgba(0,0,0,0.08);
   --shadow: rgba(0,0,0,0.12);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
 body{
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
+html,body{height:100%}
 
-/* -----------------------------------
-   PARALLAX BACKGROUND (Blobs)
-   ----------------------------------- */
+/* ========== PARALLAX BACKGROUND ========== */
 .parallax{
-  position:fixed;inset:0;
-  pointer-events:none;z-index:0;
+  position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
 }
 .parallax span{
   position:absolute;
   width:380px;height:380px;
   background:radial-gradient(circle,var(--accent),transparent 50%);
-  opacity: .08;
-  filter: blur(24px);
+  opacity:.08;filter:blur(24px);
 }
 .parallax .one{top:8%;left:12%;animation:float1 30s linear infinite}
 .parallax .two{top:55%;left:70%;animation:float2 34s linear infinite}
 .parallax .three{top:30%;left:50%;animation:float3 28s linear infinite}
-@keyframes float1{from{transform:translateY(0)}to{transform:translateY(-220px)}}
-@keyframes float2{from{transform:translateY(0)}to{transform:translateY(-260px)}}
-@keyframes float3{from{transform:translateY(0)}to{transform:translateY(-300px)}}
+@keyframes float1{to{transform:translateY(-220px)}}
+@keyframes float2{to{transform:translateY(-260px)}}
+@keyframes float3{to{transform:translateY(-300px)}}
 
-/* -----------------------------------
-   MAGNETIC CURSOR
-   ----------------------------------- */
+/* ========== MAGNETIC CURSOR ========== */
 #cursor{
   position:fixed;left:0;top:0;
   width:18px;height:18px;border-radius:50%;
-  background:var(--accent);
-  pointer-events:none;
+  background:var(--accent);pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:9000;
-  transition:width .15s ease,height .15s ease,transform .15s ease,opacity .3s;
-  will-change:transform;
+  transition:width .15s ease,height .15s ease,transform .15s ease;
 }
 .hide-cursor #cursor{opacity:0}
 
-/* -----------------------------------
-   NAVIGATION
-   ----------------------------------- */
+/* ========== HEADER ========== */
 header{
-  position:fixed;top:0;left:0;right:0;
-  backdrop-filter: blur(12px);
+  position:sticky;top:0;left:0;right:0;
+  backdrop-filter:blur(12px);
   background:rgba(0,0,0,0.45);
   z-index:2000;
 }
 nav.wrapper{
   max-width:1200px;margin:auto;
-  padding:12px 24px;display:flex;
-  justify-content:space-between;align-items:center;
+  padding:12px 24px;
+  display:flex;justify-content:space-between;align-items:center;
 }
 .brand{
-  display:flex;align-items:center;gap:10px;
-  font-weight:700;font-size:18px;color:var(--text);
-  text-decoration:none;
+  display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;
+  color:var(--text);text-decoration:none;
 }
 .brand .logo{
-  width:34px;height:34px;border-radius:8px;
+  width:32px;height:32px;border-radius:8px;
   background:var(--accent);display:flex;
-  align-items:center;justify-content:center;
-  font-weight:700;color:#02101a;
+  align-items:center;justify-content:center;font-weight:700;color:#021;
 }
 nav.links{
   display:flex;gap:20px;align-items:center;
@@ -114,20 +100,17 @@ nav .smallbtn{
   background:var(--card-bg);color:var(--muted);
 }
 
-/* -----------------------------------
-   CINEMATIC HERO
-   ----------------------------------- */
+/* ========== HERO SECTION ========== */
 .hero{
-  min-height:72vh;padding:100px 24px 40px;
+  min-height:70vh;padding:100px 24px 40px;
   position:relative;z-index:10;
 }
 .hero-inner{
   max-width:1200px;margin:auto;
-  display:grid;grid-template-columns:1fr 480px;gap:32px;
-  align-items:center;
+  display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center;
 }
 .hero-content h1{
-  font-size:48px;font-weight:700;
+  font-size:46px;font-weight:700;
   line-height:1.1;margin-bottom:14px;
 }
 .hero-content h1 .accent{color:var(--accent)}
@@ -135,10 +118,8 @@ nav .smallbtn{
   font-size:17px;color:var(--muted);max-width:680px;
 }
 .hero-cta{display:flex;gap:14px;margin-top:18px}
-
-/* hero cinematic shot */
 .hero-shot{
-  width:100%;height:360px;border-radius:18px;
+  width:100%;height:350px;border-radius:18px;
   overflow:hidden;position:relative;
   background:var(--card-bg);border:1px solid var(--border-glass);
   box-shadow:0 20px 60px var(--shadow);
@@ -148,37 +129,30 @@ nav .smallbtn{
   animation:kenburns 18s ease-in-out infinite alternate;
   filter:contrast(1.03) saturate(1.07);
 }
-@keyframes kenburns{from{transform:scale(1) translateY(0)}to{transform:scale(1.08) translateY(-16px)}}
+@keyframes kenburns{to{transform:scale(1.08) translateY(-14px)}}
 
-/* -----------------------------------
-   FILTER BUTTONS
-   ----------------------------------- */
+/* ========== FILTER BUTTONS ========== */
 .filters{
-  display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;
+  display:flex;gap:12px;flex-wrap:wrap;margin:14px 0;
 }
 .filter-btn{
-  padding:10px 16px;border-radius:14px;
+  padding:10px 16px;border-radius:12px;
   border:1px solid var(--border-glass);
-  backdrop-filter:blur(8px);
-  color:var(--muted);cursor:pointer;
-  background:var(--card-bg);
-  font-weight:600;transition: all .3s ease;
+  backdrop-filter:blur(8px);background:var(--card-bg);
+  color:var(--muted);cursor:pointer;font-weight:600;
+  transition:all .3s ease;
 }
 .filter-btn.active,
-.filter-btn:hover{
-  background:var(--accent);color:#000;
-}
+.filter-btn:hover{background:var(--accent);color:#000}
 
-/* -----------------------------------
-   PROJECT CARDS (3D + Hover)
-   ----------------------------------- */
+/* ========== PROJECT CARDS ========== */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:26px;
 }
 .card{
-  perspective:1200px;
+  perspective:1000px;
 }
 .card-inner{
   background:var(--card-bg);backdrop-filter:blur(16px);
@@ -188,17 +162,15 @@ nav .smallbtn{
   box-shadow:0 10px 30px var(--shadow);
 }
 .card-inner:hover{
-  transform:translateY(-10px) rotateX(4deg) rotateY(-6deg);
-  box-shadow:0 26px 80px var(--shadow);
+  transform:translateY(-8px) rotateX(4deg) rotateY(-6deg);
+  box-shadow:0 28px 78px var(--shadow);
 }
 .card-thumb{width:100%;height:160px;border-radius:10px;overflow:hidden;margin-bottom:12px}
 .card-thumb img{
   width:100%;height:100%;object-fit:cover
 }
 
-/* -----------------------------------
-   SKILLS & CONTACT
-   ----------------------------------- */
+/* ========== SKILLS & CONTACT ========== */
 .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 .skill-pill{padding:8px 12px;border-radius:999px;
 background:var(--card-bg);backdrop-filter:blur(8px);
@@ -215,14 +187,16 @@ font-weight:600;}
 #modal img{max-width:94%;max-height:92%;border-radius:14px}
 
 /* reveal */
-.section{
-  padding:80px 24px 120px;
-}
-.section.show{opacity:1;transform:none}
-
-/* utilities */
+.section{opacity:0;transform:translateY(36px) scale(.98);transition:1s ease}
+.section.show{opacity:1;transform:translateY(0) scale(1)}
 .center{text-align:center}
 .muted{color:var(--muted);font-size:14px}
+
+/* responsive nav */
+@media(max-width:880px){
+  nav.links a{display:none}
+  .menu-btn{display:inline-flex}
+}
 </style>
 </head>
 <body>
@@ -231,20 +205,20 @@ font-weight:600;}
 <div id="cursor"></div>
 
 <header>
-  <nav class="wrapper">
-    <a href="#" class="brand"><div class="logo">VS</div><div>Vishwas Saini</div></a>
-    <div class="links">
-      <div class="menu-btn" onclick="toggleMenu()">☰</div>
-      <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-        <a href="https://vishwassaini.itch.io/" target="_blank">Itch.io</a>
-        <a href="https://www.reddit.com/user/FeelingBullfrog5749/" target="_blank">Reddit</a>
-      </div>
-      <button class="smallbtn" onclick="toggleTheme()">Theme</button>
+<nav class="wrapper">
+  <a href="#" class="brand"><div class="logo">VS</div><div>Vishwas Saini</div></a>
+  <div class="links">
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="https://vishwassaini.itch.io/" target="_blank">Itch.io</a>
+      <a href="https://www.reddit.com/user/FeelingBullfrog5749/" target="_blank">Reddit</a>
     </div>
-  </nav>
+    <button class="smallbtn" onclick="toggleTheme()">Theme</button>
+  </div>
+</nav>
 </header>
 
 <section class="hero section">
@@ -253,26 +227,25 @@ font-weight:600;}
       <h1>Hi, I’m <span class="accent">Vishwas Saini</span></h1>
       <p>I build modern, scalable web applications using Python, Flask, PostgreSQL, and AI integrations. I focus on clean architecture, responsive design, smooth user experiences, and delivering high-quality solutions with minimal operational cost.</p>
       <div class="hero-cta">
-        <button class="filter-btn" onclick="scrollToSection('projects')">View Projects</button>
+        <button class="filter-btn" onclick="scrollTo('projects')">View Projects</button>
       </div>
-    </div>  
-    <div class="hero-shot">
-      <img src="screenshots/clinic-management-website/THIS.png" alt="Clinic Management Hero">
     </div>
+    <div class="hero-shot"><img src="screenshots/clinic-management-website/THIS.png" alt="Clinic Management Screenshot"></div>
   </div>
 </section>
 
 <section id="projects" class="section center">
-  <h2>Featured Projects</h2><div class="muted">Selected work — web apps & AI</div>
-  <div class="filters"><button class="filter-btn active" onclick="filterTags('all', this)">All</button><button class="filter-btn" onclick="filterTags('web', this)">Web</button><button class="filter-btn" onclick="filterTags('ai', this)">AI</button></div>
+  <h2>Featured Projects</h2>
+  <div class="muted">Selected work — web apps & AI</div>
+  <div class="filters"><button class="filter-btn active" onclick="filter('all',this)">All</button><button class="filter-btn" onclick="filter('web',this)">Web</button><button class="filter-btn" onclick="filter('ai',this)">AI</button></div>
   <div class="cards">
     <div class="card" data-tags="web ai">
       <div class="card-inner">
         <div class="card-thumb"><img src="screenshots/clinic-management-website/THIS.png" onclick="openModal(this)"></div>
         <h3>Clinic Management Website</h3>
-        <p class="muted">A full-featured Clinic Management System designed to help doctors efficiently manage patient information, appointments, records and communications. Integrated with secure authentication, email automation, and AI-assisted features.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <button class="filter-btn" onclick="openLink('https://clinic-management-website.onrender.com/')">Live Demo</button>
+        <p class="muted">A full-featured Clinic Management System designed to help doctors efficiently manage patient information, appointments, and communication. Integrated with authentication, email automation, and AI-assisted workflows.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="filter-btn" onclick="openLink('https://clinic-management-website.onrender.com')">Live Demo</button>
           <button class="filter-btn" onclick="openLink('https://vishwassaini.itch.io/')">Buy / Download</button>
         </div>
       </div>
@@ -287,7 +260,7 @@ font-weight:600;}
 
 <section id="contact" class="section center">
   <h2>Contact</h2>
-  <p class="muted">For project inquiries or collaborations, message me via email, Reddit, or itch.io.</p>
+  <p class="muted">Message me via email, Reddit, or itch.io for project inquiries.</p>
   <button class="filter-btn" onclick="openLink('mailto:vissaini744@gmail.com')">Email Me</button>
 </section>
 
@@ -296,60 +269,28 @@ font-weight:600;}
 <footer class="center muted">© 2026 Vishwas Saini — Python Web Developer</footer>
 
 <script>
-/* MAGNETIC CURSOR */
 const cursor = document.getElementById("cursor");
-const touch = 'ontouchstart' in window;
-if(!touch){
-  window.addEventListener("mousemove", e => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+const isTouch = 'ontouchstart' in window;
+if(!isTouch){
+  window.addEventListener("mousemove",e=>{
+    cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px";
   });
-  document.querySelectorAll("button, .card-inner").forEach(el => {
-    el.addEventListener("mouseenter", () => {
-      cursor.style.transform = "translate(-50%, -50%) scale(1.9)";
-    });
-    el.addEventListener("mouseleave", () => {
-      cursor.style.transform = "translate(-50%, -50%) scale(1)";
-    });
+  document.querySelectorAll("button,.card-inner").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cursor.style.transform="translate(-50%,-50%) scale(1.9)");
+    el.addEventListener("mouseleave",()=>cursor.style.transform="translate(-50%,-50%) scale(1)");
   });
-} else { document.body.classList.add("hide-cursor"); }
+}else{document.body.classList.add("hide-cursor");}
 
-/* THEME TOGGLE */
 function toggleTheme(){document.body.classList.toggle("light");}
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}})},{threshold:0.18});
+document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
-/* SCROLL REVEAL */
-const observer = new IntersectionObserver((items) => {
-  items.forEach(i => { if(i.isIntersecting){ i.target.classList.add("show"); }});
-},{threshold:0.2});
-document.querySelectorAll(".section").forEach(s => observer.observe(s));
-
-/* OPEN LINKS */
 function openLink(url){window.open(url,"_blank");}
-
-/* FILTER PROJECT TAGS */
-function filterTags(tag, btn){
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  document.querySelectorAll(".card").forEach(c => {
-    c.style.display = (tag==="all" || c.dataset.tags.includes(tag))?"":"none";
-  });
-}
-
-/* MODAL IMAGE */
-function openModal(el){
-  const modal = document.getElementById("modal");
-  modal.style.display="flex";
-  modal.querySelector("img").src = el.src;
-}
-function closeModal(e){
-  if(e.target.id==="modal"||e.key==="Escape")document.getElementById("modal").style.display="none";
-}
-document.addEventListener("keydown", closeModal);
-
-/* SCROLL TO */
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
+function filter(tag,btn){document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".card").forEach(c=>{c.style.display=(tag==="all"||c.dataset.tags.includes(tag))?"":"none";});}
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
+function openModal(e){const m=document.getElementById("modal");m.style.display="flex";m.querySelector("img").src=e.src;}
+function closeModal(e){if(e.target.id==="modal"||e.key==="Escape"){document.getElementById("modal").style.display="none";}}
+document.addEventListener("keydown",closeModal);
 </script>
 
 </body>
